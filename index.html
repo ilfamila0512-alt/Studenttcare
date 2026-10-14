@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Care — Bisnis Digital</title>
+<style>
+:root{--navy:#123466;--blue:#1769e8;--yellow:#ffd447;--pale:#eef5ff;--ink:#172b4d;--muted:#65758b;--line:#dce6f4;--white:#fff;--red:#e34d59;--green:#159c71}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f4f7fc;color:var(--ink)}
+button,input{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:11px 16px;font-weight:700;transition:.15s}button:hover{transform:translateY(-1px)}
+.primary{background:var(--blue);color:white}.secondary{background:#e8f1ff;color:var(--navy)}.danger{background:#fff0f0;color:#c62838}.ghost{background:white;border:1px solid var(--line);color:var(--navy)}
+header{height:70px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,5vw,64px);position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy)}.logo{height:42px;width:42px;border-radius:12px;background:var(--navy);color:var(--yellow);display:grid;place-items:center;font-weight:900;font-size:18px;box-shadow:inset 0 -4px #0b2345}.brand small{display:block;font-size:10px;letter-spacing:.5px;color:var(--muted);margin-top:3px}
+nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap}nav button{background:transparent;color:#52637c;padding:10px 12px;font-size:13px}nav button.active,nav button:hover{background:var(--pale);color:var(--blue)}
+main{max-width:1160px;margin:auto;padding:30px 22px 70px}.page{display:none;animation:fade .2s ease}.page.active{display:block}@keyframes fade{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}
+.hero{min-height:440px;border-radius:26px;background:linear-gradient(120deg,#fff 0%,#f4f8ff 65%,#dceaff 100%);padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:24px;border:1px solid var(--line);overflow:hidden;position:relative}
+.eyebrow{color:var(--blue);font-size:12px;font-weight:800;letter-spacing:1.7px;text-transform:uppercase}.hero h1{font-size:clamp(42px,6vw,68px);line-height:1.02;letter-spacing:-2px;color:var(--navy);margin:16px 0}.hero p{font-size:17px;line-height:1.7;color:var(--muted);max-width:500px}.hero-art{display:grid;place-items:center;min-height:260px}.art-card{width:min(290px,100%);aspect-ratio:1;border-radius:32px;background:linear-gradient(145deg,#1c71ef,#123466);color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 24px 50px #12346630;transform:rotate(3deg)}.art-card .big{font-size:82px}.art-card strong{font-size:23px}.art-card span{font-size:12px;margin-top:8px;color:#dceaff}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:10px 0 24px;flex-wrap:wrap}.section-head h1{color:var(--navy);font-size:32px;margin:0 0 8px}.section-head p{margin:0;color:var(--muted);line-height:1.5}.card{background:white;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 6px 22px #19365d08}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.feature{padding:23px}.feature-icon{height:48px;width:48px;border-radius:14px;background:#e8f1ff;color:var(--blue);display:grid;place-items:center;font-size:24px;margin-bottom:16px}.feature h3{margin:0 0 8px;color:var(--navy)}.feature p{margin:0;color:var(--muted);line-height:1.55;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}.stat strong{display:block;font-size:30px;color:var(--navy);margin-top:8px}.stat span{color:var(--muted);font-size:13px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}.toolbar input{flex:1;min-width:210px}.field{width:100%;border:1px solid #cfdced;border-radius:10px;padding:13px 14px;background:white;outline:none;color:var(--ink)}.field:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1769e81c}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.form-group label{display:block;font-weight:700;font-size:13px;margin-bottom:8px}.form-group.full{grid-column:1/-1}.help{font-size:12px;color:var(--muted);margin-top:7px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px}table{width:100%;border-collapse:collapse;background:white;min-width:620px}th,td{text-align:left;padding:14px 16px;border-bottom:1px solid #edf1f7;font-size:13px}th{background:#f5f8fd;color:#536680;font-size:11px;text-transform:uppercase;letter-spacing:.5px}tr:last-child td{border-bottom:0}.pill{background:#e8f1ff;color:#1654a5;padding:5px 9px;border-radius:99px;font-size:11px;font-weight:800}.row-actions{display:flex;gap:6px}.row-actions button{padding:7px 9px;font-size:12px}.empty{text-align:center;padding:35px;color:var(--muted)}
+.notice{padding:13px 16px;border-radius:12px;background:#e9f8f1;color:#08784f;margin-bottom:16px;display:none}.notice.show{display:block}.footer{text-align:center;color:#8190a4;font-size:12px;padding:24px 0 0}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}.about h2{color:var(--navy)}.about p{line-height:1.8;color:var(--muted)}.check{display:flex;gap:10px;align-items:start;margin:14px 0}.check b{color:var(--green)}
+@media(max-width:780px){header{height:auto;min-height:68px;padding:12px 16px;align-items:flex-start;gap:10px;flex-direction:column}nav{width:100%;overflow-x:auto;flex-wrap:nowrap}nav button{white-space:nowrap}.hero{grid-template-columns:1fr}.hero-art{min-height:200px}.art-card{width:210px}.art-card .big{font-size:60px}.grid{grid-template-columns:1fr 1fr}.about{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:500px){main{padding:20px 14px 45px}.grid,.form-grid{grid-template-columns:1fr}.form-group.full{grid-column:auto}.hero{padding:27px 22px}.hero h1{font-size:43px}.section-head h1{font-size:27px}.stats{grid-template-columns:1fr 1fr}.card{padding:17px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">SC</div><div>STUDENT CARE<small>BISNIS DIGITAL • UFDK</small></div></div>
+  <nav aria-label="Navigasi utama">
+    <button class="active" data-page="home">Beranda</button>
+    <button data-page="students">Data Mahasiswa</button>
+    <button data-page="add">Tambah Data</button>
+    <button data-page="features">Fitur</button>
+    <button data-page="about">Tentang</button>
+  </nav>
+</header>
+<main>
+  <section class="page active" id="home">
+    <div class="hero">
+      <div><div class="eyebrow">Sederhana • Praktis • Terorganisir</div><h1>Student<br>Care.</h1><p>Website sederhana untuk membantu pengelolaan data mahasiswa Bisnis Digital dalam satu tempat. Cari data, tambahkan mahasiswa, dan kelola daftar dengan mudah.</p><div class="actions"><button class="primary" data-go="students">Lihat Data Mahasiswa →</button><button class="secondary" data-go="add">＋ Tambah Mahasiswa</button></div></div>
+      <div class="hero-art"><div class="art-card"><div class="big">▤</div><strong>Data Mahasiswa</strong><span>Semua data, lebih teratur.</span></div></div>
+    </div>
+    <div class="stats">
+      <div class="card stat"><span>Total Mahasiswa</span><strong id="totalStat">0</strong></div>
+      <div class="card stat"><span>Data Tersimpan</span><strong>✓</strong><span>Di browser perangkat ini</span></div>
+      <div class="card stat"><span>Pengelolaan</span><strong>3-in-1</strong><span>Cari • Tambah • Edit</span></div>
+    </div>
+    <div class="section-head"><div><h1>Mulai dari sini</h1><p>Pilih halaman sesuai kebutuhanmu.</p></div></div>
+    <div class="grid">
+      <div class="card feature"><div class="feature-icon">⌕</div><h3>Cari Mahasiswa</h3><p>Temukan data berdasarkan NIM atau nama.</p><div class="actions"><button class="secondary" data-go="students">Buka daftar</button></div></div>
+      <div class="card feature"><div class="feature-icon">＋</div><h3>Tambah Data</h3><p>Isi dua kolom utama: NIM dan nama.</p><div class="actions"><button class="secondary" data-go="add">Tambah sekarang</button></div></div>
+      <div class="card feature"><div class="feature-icon">⇩</div><h3>Unduh CSV</h3><p>Simpan salinan daftar mahasiswa ke perangkatmu.</p><div class="actions"><button class="secondary" id="exportHome">Ekspor data</button></div></div>
+    </div>
+  </section>
+
+  <section class="page" id="students">
+    <div class="section-head"><div><div class="eyebrow">Direktori mahasiswa</div><h1>Data Mahasiswa</h1><p>Cari, edit, atau hapus data mahasiswa. Data awal mencakup BP22 sampai BP26.</p></div><button class="primary" data-go="add">＋ Tambah Mahasiswa</button></div>
+    <div id="notice" class="notice" role="status"></div>
+    <div class="toolbar"><input class="field" id="search" placeholder="Cari berdasarkan NIM atau nama..." aria-label="Cari mahasiswa"><button class="secondary" id="clearSearch">Reset</button><button class="ghost" id="exportBtn">⇩ Ekspor CSV</button></div>
+    <div class="table-wrap"><table><thead><tr><th>No.</th><th>NIM</th><th>Nama Mahasiswa</th><th>BP</th><th>Aksi</th></tr></thead><tbody id="studentRows"></tbody></table><div id="emptyState" class="empty" hidden>Belum ada data yang cocok. Tambahkan data mahasiswa terlebih dahulu.</div></div>
+    <p class="help">BP dipilih saat menambah atau mengedit data. Daftar awal diisi dari file data mahasiswa yang disediakan.</p>
+  </section>
+
+  <section class="page" id="add">
+    <div class="section-head"><div><div class="eyebrow">Formulir sederhana</div><h1 id="formTitle">Tambah Mahasiswa</h1><p>Cukup isi NIM dan nama mahasiswa.</p></div><button class="ghost" data-go="students">← Kembali ke daftar</button></div>
+    <div class="card" style="max-width:760px">
+      <div id="formNotice" class="notice" role="status"></div>
+      <form id="studentForm"><input type="hidden" id="editId">
+        <div class="form-grid">
+          <div class="form-group"><label for="nim">NIM *</label><input class="field" id="nim" inputmode="numeric" placeholder="Contoh: 2461209003" required maxlength="20"><div class="help">Masukkan NIM mahasiswa.</div></div>
+          <div class="form-group"><label for="nama">Nama Mahasiswa *</label><input class="field" id="nama" placeholder="Contoh: Ilfa Mila Fazira" required maxlength="100"><div class="help">Gunakan nama lengkap.</div></div>
+          <div class="form-group full"><label for="bpPreview">BP / Angkatan *</label><select class="field" id="bpPreview" required><option value="">Pilih BP mahasiswa</option><option value="BP22">BP22</option><option value="BP23">BP23</option><option value="BP24">BP24</option><option value="BP25">BP25</option><option value="BP26">BP26</option></select><div class="help">Pilih BP yang sesuai. BP tidak harus ditentukan otomatis dari NIM.</div></div>
+          <div class="form-group full"><div class="actions"><button class="primary" type="submit" id="saveBtn">Simpan Data</button><button class="ghost" type="button" id="cancelEdit">Batal</button></div></div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="page" id="features">
+    <div class="section-head"><div><div class="eyebrow">Dibuat agar mudah digunakan</div><h1>Fitur Utama</h1><p>Fitur penting tanpa formulir yang rumit.</p></div></div>
+    <div class="grid">
+      <div class="card feature"><div class="feature-icon">＋</div><h3>Input Minimal</h3><p>Hanya NIM dan nama yang perlu diketik. BP diisi otomatis berdasarkan awalan NIM.</p></div>
+      <div class="card feature"><div class="feature-icon">⌕</div><h3>Pencarian Cepat</h3><p>Gunakan NIM atau nama untuk menyaring daftar secara langsung.</p></div>
+      <div class="card feature"><div class="feature-icon">✎</div><h3>Edit Data</h3><p>Perbarui NIM atau nama tanpa perlu menambahkan ulang data.</p></div>
+      <div class="card feature"><div class="feature-icon">×</div><h3>Hapus Data</h3><p>Hapus data yang tidak diperlukan setelah konfirmasi.</p></div>
+      <div class="card feature"><div class="feature-icon">⇩</div><h3>Ekspor CSV</h3><p>Unduh daftar menjadi file CSV yang dapat dibuka di spreadsheet.</p></div>
+      <div class="card feature"><div class="feature-icon">▣</div><h3>Responsif</h3><p>Tampilan menyesuaikan layar laptop maupun ponsel.</p></div>
+    </div>
+  </section>
+
+  <section class="page" id="about">
+    <div class="section-head"><div><div class="eyebrow">Tentang proyek</div><h1>Student Care</h1><p>Pengelolaan data mahasiswa dalam tampilan yang sederhana.</p></div></div>
+    <div class="about">
+      <div class="card"><div class="feature-icon">SC</div><h2>Tujuan Website</h2><p>Student Care dirancang sebagai contoh website sederhana untuk membantu pengguna mencatat dan menemukan data mahasiswa Bisnis Digital. Navigasi dibagi menjadi beberapa halaman agar fungsi setiap menu mudah dipahami.</p><p>Website ini merupakan prototipe lokal untuk latihan. Data tersimpan di browser yang digunakan, bukan di server kampus.</p></div>
+      <div class="card"><h2>Yang perlu diketahui</h2><div class="check"><b>✓</b><div><strong>Input ringkas</strong><p>NIM dan nama mahasiswa saja.</p></div></div><div class="check"><b>✓</b><div><strong>Data lokal</strong><p>Data tersimpan di browser pada perangkat ini.</p></div></div><div class="check"><b>✓</b><div><strong>Bisa diekspor</strong><p>Unduh file CSV sebagai cadangan.</p></div></div><div class="check"><b>!</b><div><strong>Belum tersambung online</strong><p>Data tidak otomatis tersinkron ke perangkat lain.</p></div></div></div>
+    </div>
+    <div class="actions"><button class="primary" data-go="home">Kembali ke Beranda</button><button class="secondary" data-go="students">Buka Data Mahasiswa</button></div>
+  </section>
+  <div class="footer">Student Care • Prodi Bisnis Digital • Universitas Fort De Kock</div>
+</main>
+<script>
+const KEY='studentCareData_v2';
+const INITIAL_STUDENTS=[{"id": "2261209001", "nim": "2261209001", "nama": "Agung Hidayatullah", "bp": "BP22"}, {"id": "2261209002", "nim": "2261209002", "nama": "Evan Dinata Davidson", "bp": "BP22"}, {"id": "2261209003", "nim": "2261209003", "nama": "Fadilah Revianda", "bp": "BP22"}, {"id": "2261209004", "nim": "2261209004", "nama": "Intan Lavaju Savitri", "bp": "BP22"}, {"id": "2261209008", "nim": "2261209008", "nama": "Muhammad Hanif", "bp": "BP22"}, {"id": "2261209009", "nim": "2261209009", "nama": "Suhail Mukhtar", "bp": "BP22"}, {"id": "2261209011", "nim": "2261209011", "nama": "Riandy Fajri", "bp": "BP22"}, {"id": "2261209012", "nim": "2261209012", "nama": "Tazkia Aulia Hamdi", "bp": "BP22"}, {"id": "2261209014", "nim": "2261209014", "nama": "Zaharani", "bp": "BP22"}, {"id": "2261209015", "nim": "2261209015", "nama": "Ziyad Alfarissy", "bp": "BP22"}, {"id": "2261209017", "nim": "2261209017", "nama": "Lisa Fitri Handayani", "bp": "BP22"}, {"id": "2261209018", "nim": "2261209018", "nama": "Raja Indra Pratama", "bp": "BP22"}, {"id": "2261209019", "nim": "2261209019", "nama": "Dhea Trimulyani", "bp": "BP22"}, {"id": "2261209020", "nim": "2261209020", "nama": "Silvia Winas", "bp": "BP22"}, {"id": "2261209021", "nim": "2261209021", "nama": "Putri Nurlela", "bp": "BP22"}, {"id": "2361209001", "nim": "2361209001", "nama": "Agung pratama", "bp": "BP23"}, {"id": "2361209002", "nim": "2361209002", "nama": "Aisyiah Agustina Asheli", "bp": "BP23"}, {"id": "2361209003", "nim": "2361209003", "nama": "Ananda Gristy Razi Ramadhani", "bp": "BP23"}, {"id": "2361209004", "nim": "2361209004", "nama": "Annissa putri", "bp": "BP23"}, {"id": "2361209005", "nim": "2361209005", "nama": "Asyraf jamil", "bp": "BP23"}, {"id": "2361209006", "nim": "2361209006", "nama": "Dhivana Dania Faiqah", "bp": "BP23"}, {"id": "2361209007", "nim": "2361209007", "nama": "Dini Abidah Ingrid Tora", "bp": "BP23"}, {"id": "2361209008", "nim": "2361209008", "nama": "Humairaa", "bp": "BP23"}, {"id": "2361209009", "nim": "2361209009", "nama": "Intan Putri Aulia", "bp": "BP23"}, {"id": "2361209010", "nim": "2361209010", "nama": "Lola Amelia Fitri Alexa", "bp": "BP23"}, {"id": "2361209011", "nim": "2361209011", "nama": "Mella Causarni", "bp": "BP23"}, {"id": "2361209012", "nim": "2361209012", "nama": "Muhammad Luthfi Fadlurrahman", "bp": "BP23"}, {"id": "2361209013", "nim": "2361209013", "nama": "Najwa", "bp": "BP23"}, {"id": "2361209014", "nim": "2361209014", "nama": "Namira Kasih", "bp": "BP23"}, {"id": "2361209015", "nim": "2361209015", "nama": "Nazmi Ulya", "bp": "BP23"}, {"id": "2361209016", "nim": "2361209016", "nama": "Putri Agustina", "bp": "BP23"}, {"id": "2361209017", "nim": "2361209017", "nama": "Rafkhy Muhammad Ikhsan", "bp": "BP23"}, {"id": "2361209018", "nim": "2361209018", "nama": "Rika Mayang Sari", "bp": "BP23"}, {"id": "2361209019", "nim": "2361209019", "nama": "Salsa Billa", "bp": "BP23"}, {"id": "2361209020", "nim": "2361209020", "nama": "Tri Wulandari", "bp": "BP23"}, {"id": "2361209021", "nim": "2361209021", "nama": "Varisa Dwi Yanti", "bp": "BP23"}, {"id": "2461209001", "nim": "2461209001", "nama": "Yuanda Silva", "bp": "BP24"}, {"id": "2461209002", "nim": "2461209002", "nama": "Auliya Anita", "bp": "BP24"}, {"id": "2461209003", "nim": "2461209003", "nama": "Ilfa Mila Fazira", "bp": "BP24"}, {"id": "2461209004", "nim": "2461209004", "nama": "Luqmanul Hakim", "bp": "BP24"}, {"id": "2461209006", "nim": "2461209006", "nama": "Rafli Idra Siddiq", "bp": "BP24"}, {"id": "2461209007", "nim": "2461209007", "nama": "Sofi Angraini", "bp": "BP24"}, {"id": "2461209008", "nim": "2461209008", "nama": "Muhamad Rizky Setiawan", "bp": "BP24"}, {"id": "2461209009", "nim": "2461209009", "nama": "Sherly Marfilani", "bp": "BP24"}, {"id": "2461209010", "nim": "2461209010", "nama": "Ahmad Rayyan", "bp": "BP24"}, {"id": "2461209011", "nim": "2461209011", "nama": "Muhammad Nuril Huda HZ", "bp": "BP24"}, {"id": "2461209013", "nim": "2461209013", "nama": "Hasya Yovanda", "bp": "BP24"}, {"id": "2561209001", "nim": "2561209001", "nama": "Aurel Marlia Sabrina", "bp": "BP25"}, {"id": "2561209002", "nim": "2561209002", "nama": "Meli Saputri", "bp": "BP25"}, {"id": "2561209003", "nim": "2561209003", "nama": "Bintang Ayu Hendriana", "bp": "BP25"}, {"id": "2561209004", "nim": "2561209004", "nama": "Rahmat Saputra", "bp": "BP25"}, {"id": "2561209005", "nim": "2561209005", "nama": "Hana Putri Atikah", "bp": "BP25"}, {"id": "2561209006", "nim": "2561209006", "nama": "Abdillah Zikri", "bp": "BP25"}, {"id": "2561209007", "nim": "2561209007", "nama": "MHD. Dahnial", "bp": "BP25"}, {"id": "2561209008", "nim": "2561209008", "nama": "Yoni Noverman", "bp": "BP25"}, {"id": "256120909", "nim": "256120909", "nama": "Nabila AZ Zahra", "bp": "BP25"}, {"id": "2561209010", "nim": "2561209010", "nama": "Khairatul Hisana", "bp": "BP25"}, {"id": "2561209012", "nim": "2561209012", "nama": "Astarina Kirani Sukoco", "bp": "BP25"}, {"id": "2561209013", "nim": "2561209013", "nama": "Dina Mazlita Ayuni", "bp": "BP25"}, {"id": "2561209016", "nim": "2561209016", "nama": "Rozi Putri Warni", "bp": "BP25"}, {"id": "2561209017", "nim": "2561209017", "nama": "Azkiyatul Hanifa", "bp": "BP25"}, {"id": "2561209018", "nim": "2561209018", "nama": "Abdurrazaq Al Syakib", "bp": "BP25"}, {"id": "2561209019", "nim": "2561209019", "nama": "Najla Nufaisa", "bp": "BP25"}, {"id": "2561209022", "nim": "2561209022", "nama": "Kezia Aprilla", "bp": "BP25"}, {"id": "2501209015", "nim": "2501209015", "nama": "Dian Prananda", "bp": "BP25"}, {"id": "2661209001", "nim": "2661209001", "nama": "Arthur Zacky Ibrahim", "bp": "BP26"}, {"id": "2661209002", "nim": "2661209002", "nama": "Aryo Nugraha", "bp": "BP26"}, {"id": "2661209003", "nim": "2661209003", "nama": "Asyfa Thalita", "bp": "BP26"}, {"id": "2661209004", "nim": "2661209004", "nama": "Azannur karim", "bp": "BP26"}, {"id": "2661209005", "nim": "2661209005", "nama": "Bunga Amelia", "bp": "BP26"}, {"id": "2661209006", "nim": "2661209006", "nama": "Dina Amelia Putri", "bp": "BP26"}, {"id": "2661209007", "nim": "2661209007", "nama": "Ficka Azillah", "bp": "BP26"}, {"id": "2661209008", "nim": "2661209008", "nama": "Intan Aulia Rachman", "bp": "BP26"}, {"id": "2661209009", "nim": "2661209009", "nama": "Keysha Oktaviola", "bp": "BP26"}, {"id": "2661209010", "nim": "2661209010", "nama": "Laurensia Marvella", "bp": "BP26"}, {"id": "2661209011", "nim": "2661209011", "nama": "Maisyanazabilla", "bp": "BP26"}, {"id": "2661209012", "nim": "2661209012", "nama": "Miftahul Rahmah", "bp": "BP26"}, {"id": "2661209013", "nim": "2661209013", "nama": "Mikesha Julian Nanda", "bp": "BP26"}, {"id": "2661209014", "nim": "2661209014", "nama": "Mozya Dwi Ariyanti", "bp": "BP26"}, {"id": "2661209015", "nim": "2661209015", "nama": "Muhammad Hasbi Asshiddiqi", "bp": "BP26"}, {"id": "2661209016", "nim": "2661209016", "nama": "Mutiara Khairun Nisa", "bp": "BP26"}, {"id": "2661209017", "nim": "2661209017", "nama": "Naa'ifa Choirunnisa", "bp": "BP26"}, {"id": "2661209018", "nim": "2661209018", "nama": "Nasywa Rana Zahira", "bp": "BP26"}, {"id": "2661209019", "nim": "2661209019", "nama": "Raka Jasel Martha", "bp": "BP26"}, {"id": "2661209020", "nim": "2661209020", "nama": "Renata Mayza Putri", "bp": "BP26"}, {"id": "2661209021", "nim": "2661209021", "nama": "Rusydi Fazri", "bp": "BP26"}, {"id": "2661209022", "nim": "2661209022", "nama": "Suci Anggraini", "bp": "BP26"}, {"id": "2661209023", "nim": "2661209023", "nama": "Tiara Dee Feyona", "bp": "BP26"}, {"id": "2661209024", "nim": "2661209024", "nama": "Yusmi Restu Ramadhani", "bp": "BP26"}, {"id": "2661209025", "nim": "2661209025", "nama": "zahied Jamaluddien Haqqanie", "bp": "BP26"}];
+let students=[];
+try{const saved=localStorage.getItem(KEY);students=saved===null?INITIAL_STUDENTS:JSON.parse(saved)}catch(e){students=INITIAL_STUDENTS}
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem(KEY,JSON.stringify(students));render()}
+function bpFromNim(nim){const bp='BP'+nim.trim().slice(0,2);return ['BP22','BP23','BP24','BP25','BP26'].includes(bp)?bp:''}
+function go(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===page));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='students')render();if(page==='add'&&!$('editId').value)resetForm();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.page)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.go)));
+function showNotice(message,form=false){const el=$(form?'formNotice':'notice');el.textContent=message;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),3500)}
+function render(){
+ const q=$('search').value.trim().toLowerCase();
+ const filtered=students.filter(s=>s.nim.toLowerCase().includes(q)||s.nama.toLowerCase().includes(q));
+ $('studentRows').innerHTML='';
+ filtered.forEach((s,i)=>{const tr=document.createElement('tr');const vals=[i+1,s.nim,s.nama,s.bp];vals.forEach((v,j)=>{const td=document.createElement('td');if(j===3){const span=document.createElement('span');span.className='pill';span.textContent=v;td.appendChild(span)}else td.textContent=v;tr.appendChild(td)});
+ const td=document.createElement('td'),actions=document.createElement('div');actions.className='row-actions';
+ const edit=document.createElement('button');edit.className='secondary';edit.textContent='Edit';edit.onclick=()=>editStudent(s.id);
+ const del=document.createElement('button');del.className='danger';del.textContent='Hapus';del.onclick=()=>deleteStudent(s.id);
+ actions.append(edit,del);td.appendChild(actions);tr.appendChild(td);$('studentRows').appendChild(tr)});
+ $('emptyState').hidden=filtered.length!==0;$('totalStat').textContent=students.length;
+}
+function resetForm(){$('studentForm').reset();$('editId').value='';$('formTitle').textContent='Tambah Mahasiswa';$('saveBtn').textContent='Simpan Data';$('bpPreview').value='';}
+$('nim').addEventListener('input',()=>{const suggested=bpFromNim($('nim').value);if(suggested)$('bpPreview').value=suggested;});
+$('studentForm').addEventListener('submit',e=>{e.preventDefault();const nim=$('nim').value.trim(),nama=$('nama').value.trim(),id=$('editId').value;const bp=$('bpPreview').value;if(!nim||!nama||!bp){showNotice('NIM, nama, dan BP harus diisi.',true);return}const duplicate=students.some(s=>s.nim.toLowerCase()===nim.toLowerCase()&&s.id!==id);if(duplicate){showNotice('NIM tersebut sudah terdaftar. Periksa kembali.',true);return}if(id){students=students.map(s=>s.id===id?{...s,nim,nama,bp}:s);showNotice('Data mahasiswa berhasil diperbarui.')}else{students.push({id:String(Date.now())+Math.random().toString(16).slice(2),nim,nama,bp});showNotice('Data mahasiswa berhasil ditambahkan.')}save();resetForm();go('students')});
+function editStudent(id){const s=students.find(x=>x.id===id);if(!s)return;$('editId').value=s.id;$('nim').value=s.nim;$('nama').value=s.nama;$('bpPreview').value=s.bp;$('formTitle').textContent='Edit Data Mahasiswa';$('saveBtn').textContent='Simpan Perubahan';go('add')}
+function deleteStudent(id){const s=students.find(x=>x.id===id);if(!s)return;if(confirm('Hapus data '+s.nama+' ('+s.nim+')?')){students=students.filter(x=>x.id!==id);save();showNotice('Data berhasil dihapus.')}}
+$('cancelEdit').addEventListener('click',()=>{resetForm();go('students')});
+$('search').addEventListener('input',render);$('clearSearch').addEventListener('click',()=>{$('search').value='';render()});
+function exportCSV(){if(!students.length){alert('Belum ada data untuk diekspor.');return}const rows=[['NIM','Nama Mahasiswa','BP'],...students.map(s=>[s.nim,s.nama,s.bp])];const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='Data_Mahasiswa_StudentCare.csv';a.click();URL.revokeObjectURL(url)}
+$('exportBtn').addEventListener('click',exportCSV);$('exportHome').addEventListener('click',exportCSV);render();
+</script>
+</body>
+</html>
